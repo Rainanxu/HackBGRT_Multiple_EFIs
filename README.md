@@ -21,7 +21,7 @@ bootaa64_1.efi bootarm_1.efi <br> bootia32_1.efi bootx64_1.efi | config_1.txt
 bootaa64_2.efi bootarm_2.efi <br> bootia32_2.efi bootx64_2.efi | config_2.txt
 ... | ...
 
-You can also modify the code of the configuration file path in src/main.c:
+You can also modify the code of the configuration file path in `src/main.c`:
 
 line 443 `\\EFI\\HackBGRT` in `if (EFI_ERROR(root_dir->Open(root_dir, &base_dir, L"\\EFI\\HackBGRT", EFI_FILE_MODE_READ, 0))) {`
 <br>
