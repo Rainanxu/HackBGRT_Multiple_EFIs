@@ -77,7 +77,8 @@ certificate.cer pki:
 	@false
 
 efi-signed/%.efi: efi/%.efi pki
-	@mkdir -p efi-signed
+	if not exist "-p" mkdir -p
+	if not exist "efi-signed" mkdir efi-signed
 	pesign --force -n pki -i $< -o $@ -c HackBGRT-signer -s
 
 efi/bootx64.efi: CLANG_TARGET = x86_64-pc-windows-msvc
@@ -90,14 +91,16 @@ efi/bootaa64.efi: CLANG_TARGET = aarch64-pc-windows-msvc
 efi/bootaa64.efi: GNUEFI_ARCH = aa64
 
 efi/boot%.efi: $(FILES_C)
-	@mkdir -p efi
+	if not exist "-p" mkdir -p
+	if not exist "efi" mkdir efi
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 efi/bootarm.efi: CLANG_TARGET = armv6-pc-windows-msvc
 efi/bootarm.efi: GNUEFI_ARCH = arm
 efi/bootarm.efi: ARCH_CFLAGS = -O # skip -O2 and -mno-red-zone
 efi/bootarm.efi: $(FILES_C)
-	@mkdir -p efi
+	if not exist "-p" mkdir -p
+	if not exist "efi" mkdir efi
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 	@echo "Fix $@ architecture code (IMAGE_FILE_MACHINE_ARMTHUMB_MIXED = 0x01C2)"
 	echo -en "\xc2\x01" | dd of=$@ bs=1 seek=124 count=2 conv=notrunc status=none
