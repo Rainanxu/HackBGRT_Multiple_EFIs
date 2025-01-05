@@ -447,7 +447,7 @@ EFI_STATUS EFIAPI efi_main(EFI_HANDLE image_handle, EFI_SYSTEM_TABLE *ST_) {
 
 	EFI_SHELL_PARAMETERS_PROTOCOL *shell_param_proto = NULL;
 	if (EFI_ERROR(BS->OpenProtocol(image_handle, TmpGuidPtr((EFI_GUID) EFI_SHELL_PARAMETERS_PROTOCOL_GUID), (void**) &shell_param_proto, 0, 0, EFI_OPEN_PROTOCOL_GET_PROTOCOL)) || shell_param_proto->Argc <= 1) {
-		const CHAR16* config_path = L"config.txt";
+		const CHAR16* config_path = L"config_0.txt";
 		if (!ReadConfigFile(&config, base_dir, config_path)) {
 			Log(1, L"No config, no command line!\n", config_path);
 			goto fail;
